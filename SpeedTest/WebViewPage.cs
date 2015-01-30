@@ -40,7 +40,7 @@ namespace SpeedTest
 			StringBuilder html = new StringBuilder ();
 			html.Append (header);
 
-			for (int nn = 0; nn < 12; nn++) {
+			for (int month = 0; month < 12; month++) {
 				html.Append ("<h3>" + date.Year + "年" + date.Month + "月" + "</h3>");
 
 				html.Append ("<Table><tr>");
@@ -61,9 +61,9 @@ namespace SpeedTest
 				}
 
 				int days = DateTime.DaysInMonth (date.Year, date.Month);
-				string monthid = date.Year.ToString ("0000") + date.Month.ToString ("00");
+				string monthid = "d" + date.Year.ToString ("0000") + date.Month.ToString ("00");
 				for (int num = 1; num <= days; num++) {
-					html.Append ("<td><span id='" + monthid + num.ToString("00") + "'");
+					html.Append ("<td id='" + monthid + num.ToString("00") + "'><span");
 					if((num + before) % 7 == 1)
 						html.Append (" class='red'");
 					else if((num + before) % 7 == 0)
@@ -72,8 +72,7 @@ namespace SpeedTest
 					if((num + before) % 7 == 0 && num != days)
 						html.Append ("</tr><tr>");
 				}			
-				html.Append ("</tr>");
-				html.Append ("</table>");
+				html.Append ("</tr></table>");
 
 				date = date.AddMonths (1);
 			}
